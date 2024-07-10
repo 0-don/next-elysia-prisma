@@ -1,0 +1,29 @@
+services:
+  demo:
+    container_name: demo
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: prod
+      args:
+        - SECRET=${SECRET}
+        - DATABASE_URL=${DATABASE_URL}
+        - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
+    environment:
+      - SECRET=${SECRET}
+      - DATABASE_URL=${DATABASE_URL}
+      - NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.demo.rule=Host(`demo.coding.global`)"
+      - "traefik.http.routers.demo.entrypoints=websecure"
+      - "traefik.http.routers.demo.tls.certresolver=letsencrypt"
+      - "traefik.http.services.demo.loadbalancer.server.port=3000"
+
+networks:
+  proxy:
+    external: false
+    name: proxy
