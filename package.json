@@ -11,10 +11,10 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@elysiajs/eden": "^1.0.14",
-    "@prisma/client": "^5.16.2",
-    "@tanstack/react-query": "^5.51.1",
-    "elysia": "^1.0.27",
+    "@elysiajs/eden": "^1.1.2",
+    "@prisma/client": "^5.17.0",
+    "@tanstack/react-query": "^5.51.15",
+    "elysia": "^1.1.4",
     "jose": "^5.6.3",
     "next": "14.2.5",
     "react": "^18",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@types/bun": "^1.1.6",
-    "@types/node": "^20.14.10",
+    "@types/node": "^20.14.12",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
@@ -30,8 +30,8 @@
     "postcss": "^8",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",
-    "prisma": "^5.16.2",
-    "tailwindcss": "^3.4.4",
+    "prisma": "^5.17.0",
+    "tailwindcss": "^3.4.7",
     "typescript": "^5"
   }
 }
