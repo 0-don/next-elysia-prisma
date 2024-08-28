@@ -1,7 +1,7 @@
 import { encrypt } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
 import { serverEnv } from "@/utils/env/server";
-import { Elysia, ParseError } from "elysia";
+import { Elysia, InternalServerError } from "elysia";
 import { authUser } from "./typebox";
 
 /**
@@ -17,7 +17,7 @@ export const authRoute = new Elysia({ prefix: "/auth" })
       const userExist = await prisma.user.findFirst({
         where: { username: ctx.body.username.trim() },
       });
-      if (userExist) throw new ParseError("User already exists");
+      if (userExist) throw new InternalServerError("User already exists");
 
       // Create new user
       const user = await prisma.user.create({
@@ -50,7 +50,7 @@ export const authRoute = new Elysia({ prefix: "/auth" })
         },
       });
 
-      if (!user) throw new ParseError("User not found");
+      if (!user) throw new InternalServerError("User not found");
 
       // Set authentication cookie
       ctx.cookie[serverEnv.AUTH_COOKIE].set({

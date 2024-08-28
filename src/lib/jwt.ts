@@ -31,7 +31,7 @@ export const encrypt = async (value: any): Promise<string | null> => {
  * @returns A Promise that resolves to the decrypted value (as type T), or null if decryption fails
  */
 export const decrypt = async <T = string>(
-  encryptedText: string,
+  encryptedText?: string,
 ): Promise<T | null> => {
   if (typeof encryptedText !== "string") return null;
   try {
