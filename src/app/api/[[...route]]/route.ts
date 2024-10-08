@@ -3,6 +3,11 @@ import { userRoute } from "@/server/user";
 import { Elysia } from "elysia";
 
 /**
+ * Force dynamic import for RPC clients
+ */
+export const dynamic = "force-dynamic";
+
+/**
  * Main API router
  * Combines auth and user routes under the '/api' prefix
  */
