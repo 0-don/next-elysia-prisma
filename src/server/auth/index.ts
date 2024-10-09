@@ -1,9 +1,9 @@
 import { encrypt } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
+import { authUser } from "@/lib/typebox/auth";
 import { serverEnv } from "@/utils/env/server";
 import { Elysia, InternalServerError } from "elysia";
 import { cookies } from "next/headers";
-import { authUser } from "./typebox";
 
 /**
  * Authentication routes for user registration, login, and logout.
