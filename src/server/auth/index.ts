@@ -2,6 +2,7 @@ import { encrypt } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
 import { serverEnv } from "@/utils/env/server";
 import { Elysia, InternalServerError } from "elysia";
+import { cookies } from "next/headers";
 import { authUser } from "./typebox";
 
 /**
@@ -28,8 +29,9 @@ export const authRoute = new Elysia({ prefix: "/auth" })
       });
 
       // Set authentication cookie
-      ctx.cookie[serverEnv.AUTH_COOKIE].set({
-        value: await encrypt(user),
+      cookies().set({
+        name: serverEnv.AUTH_COOKIE,
+        value: (await encrypt(user))!,
         path: "/",
         httpOnly: true,
         maxAge: serverEnv.SEVEN_DAYS,
@@ -52,9 +54,9 @@ export const authRoute = new Elysia({ prefix: "/auth" })
 
       if (!user) throw new InternalServerError("User not found");
 
-      // Set authentication cookie
-      ctx.cookie[serverEnv.AUTH_COOKIE].set({
-        value: await encrypt(user),
+      cookies().set({
+        name: serverEnv.AUTH_COOKIE,
+        value: (await encrypt(user))!,
         path: "/",
         httpOnly: true,
         maxAge: serverEnv.SEVEN_DAYS,
@@ -66,11 +68,5 @@ export const authRoute = new Elysia({ prefix: "/auth" })
   )
   .get("/logout", (ctx) => {
     // Clear authentication cookie
-    ctx.cookie[serverEnv.AUTH_COOKIE].set({
-      value: "",
-      path: "/",
-      httpOnly: true,
-      maxAge: 0,
-    });
-    return "success";
+    return !!cookies().delete(serverEnv.AUTH_COOKIE);
   });
