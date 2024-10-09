@@ -20,7 +20,7 @@ export const parse = <T extends TSchema>(
 };
 
 /**
- * Simplifies the response from Elysia tRP for `tanstack-query`, extracting the data or throwing an error.
+ * Simplifies the response from Elysia tRP for `tanstack-query`, extracting the DATA or throwing an error.
  */
 export function handleEden<T>(
   response: (
