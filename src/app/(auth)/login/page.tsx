@@ -1,7 +1,7 @@
 "use client";
 
 import { AuthHook } from "@/components/hooks/auth-hook";
-import { authUser } from "@/server/auth/typebox";
+import { authUser } from "@/lib/typebox/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
