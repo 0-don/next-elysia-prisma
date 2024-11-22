@@ -1,8 +1,9 @@
 import { encrypt } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
-import { authUser } from "@/lib/typebox/auth";
+import { authenticationSchema } from "@/lib/typebox/auth";
 import { serverEnv } from "@/utils/env/server";
 import { Elysia, InternalServerError } from "elysia";
+import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
 
 /**
@@ -28,18 +29,17 @@ export const authRoute = new Elysia({ prefix: "/auth" })
         },
       });
 
-      // Set authentication cookie
-      cookies().set({
+      const cookie: ResponseCookie = {
         name: serverEnv.AUTH_COOKIE,
         value: (await encrypt(user))!,
         path: "/",
         httpOnly: true,
         maxAge: serverEnv.SEVEN_DAYS,
-      });
-
-      return "success";
+      };
+      // Set authentication cookie
+      (await cookies()).set(cookie);
     },
-    { body: authUser }, // Use authUser schema for request body validation
+    { body: authenticationSchema }, // Use authUser schema for request body validation
   )
   .post(
     "/login",
@@ -54,19 +54,19 @@ export const authRoute = new Elysia({ prefix: "/auth" })
 
       if (!user) throw new InternalServerError("User not found");
 
-      cookies().set({
+      const cookie: ResponseCookie = {
         name: serverEnv.AUTH_COOKIE,
         value: (await encrypt(user))!,
         path: "/",
         httpOnly: true,
         maxAge: serverEnv.SEVEN_DAYS,
-      });
-
-      return "success";
+      };
+      // Set authentication cookie
+      (await cookies()).set(cookie);
     },
-    { body: authUser }, // Use authUser schema for request body validation
+    { body: authenticationSchema }, // Use authUser schema for request body validation
   )
-  .get("/logout", (ctx) => {
+  .get("/logout", async (ctx) => {
     // Clear authentication cookie
-    return !!cookies().delete(serverEnv.AUTH_COOKIE);
+    !!(await cookies()).delete(serverEnv.AUTH_COOKIE);
   });

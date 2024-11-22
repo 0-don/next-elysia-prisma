@@ -1,13 +1,12 @@
 "use client";
 
 import { AuthHook } from "@/components/hooks/auth-hook";
+import { authenticationSchema, authSchemas } from "@/lib/typebox/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
-interface RegisterPageProps {}
-
-export default function RegisterPage(props: RegisterPageProps) {
+export default function RegisterPage() {
   const router = useRouter();
   const { registerMutation } = AuthHook();
   const [status, setStatus] = useState("");
@@ -21,7 +20,7 @@ export default function RegisterPage(props: RegisterPageProps) {
         username,
         password,
       })
-      .then((user) => (user ? router.push("/dashboard") : setStatus(user)))
+      .then(() => router.push("/dashboard"))
       .catch((error) => setStatus(JSON.stringify(error)));
   };
 
@@ -34,7 +33,10 @@ export default function RegisterPage(props: RegisterPageProps) {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          minLength={authenticationSchema.properties.username.minLength}
+          maxLength={authenticationSchema.properties.username.maxLength}
           required
+          autoComplete="username"
         />
       </div>
       <div className="flex flex-col border">
@@ -43,12 +45,25 @@ export default function RegisterPage(props: RegisterPageProps) {
           id="password"
           type="password"
           value={password}
+          minLength={authenticationSchema.properties.password.minLength}
+          maxLength={authenticationSchema.properties.password.maxLength}
           onChange={(e) => setPassword(e.target.value)}
           required
+          autoComplete="current-password"
         />
       </div>
       <div className="flex justify-between">
-        <button className="bg-red-600" type="submit">
+        <button
+          className="bg-red-600 disabled:bg-gray-600"
+          type="submit"
+          disabled={
+            registerMutation.isPending ||
+            !authSchemas.authUser.safeParse({
+              username,
+              password,
+            }).success
+          }
+        >
           Register
         </button>
 

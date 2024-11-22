@@ -13,7 +13,9 @@ export default async function MainLayout(props: MainLayoutProps) {
   const queryClient = getQueryClient();
 
   // Fetch current user data set cookies are required else they will be empty
-  const { data: me, error: meError } = await rpc.api.user.me.get(setCookies());
+  const { data: me, error: meError } = await rpc.api.user.me.get(
+    await setCookies(),
+  );
 
   if (meError) redirect("/login");
 

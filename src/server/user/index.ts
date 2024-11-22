@@ -2,6 +2,7 @@ import { decrypt } from "@/lib/jwt";
 import { serverEnv } from "@/utils/env/server";
 import { User } from "@prisma/client";
 import { Elysia, InternalServerError } from "elysia";
+import { cookies } from "next/headers";
 
 /**
  * User route for retrieving the current user's information.
@@ -11,8 +12,9 @@ import { Elysia, InternalServerError } from "elysia";
 export const userRoute = new Elysia({ prefix: "/user" }).get(
   "/me",
   async (ctx) => {
-    // Decrypt user information from the authentication jwt cookie
-    const user = await decrypt<User>(ctx.cookie[serverEnv.AUTH_COOKIE].value);
+    const user = await decrypt<User>(
+      (await cookies()).get(serverEnv.AUTH_COOKIE)?.value,
+    );
 
     if (!user) throw new InternalServerError("User not found");
 

@@ -2,9 +2,6 @@ import { authRoute } from "@/server/auth";
 import { userRoute } from "@/server/user";
 import { Elysia } from "elysia";
 
-/**
- * Force dynamic import for RPC clients
- */
 export const dynamic = "force-dynamic";
 
 /**

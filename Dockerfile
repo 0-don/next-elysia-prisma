@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json ./
 COPY prisma ./prisma
 
-RUN npm install
+RUN npm install --force
 
 # 
 FROM node:20-alpine AS builder
