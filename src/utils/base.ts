@@ -1,26 +1,16 @@
 import type { EdenFetchError } from "@elysiajs/eden/dist/errors";
-import { Errors } from "@sinclair/typebox/errors";
+import { TypeCompiler } from "@sinclair/typebox/compiler";
 import type { Static, TSchema } from "@sinclair/typebox/type";
-import { Check } from "@sinclair/typebox/value";
 
 /**
- * Parses a value against a TypeBox schema and throws an error if invalid.
- * @param schema The TypeBox schema to validate against.
- * @param value The value to validate.
- * @returns The validated value.
- * @throws Error if the value is invalid according to the schema.
- */
-export const parse = <T extends TSchema>(
-  schema: T,
-  value: unknown,
-): Static<T> => {
-  const check = Check(schema, value);
-  if (!check) throw new Error(Errors(schema, value).First()?.message);
-  return value;
-};
-
-/**
- * Simplifies the response from Elysia tRP for `tanstack-query`, extracting the DATA or throwing an error.
+ * Helper to handle Eden.js API responses for use with TanStack Query.
+ * Takes an Eden response object and either:
+ * - Returns the data if successful
+ * - Throws the error if unsuccessful
+ *
+ * @param response The Eden response object containing data or error
+ * @returns The response data of type T
+ * @throws EdenFetchError if the response contains an error
  */
 export function handleEden<T>(
   response: (
@@ -40,4 +30,37 @@ export function handleEden<T>(
 ): T {
   if (response.error) throw response.error;
   return response.data;
+}
+
+/**
+ * Safe parsing utility for TypeBox schemas that returns a discriminated union result
+ * rather than throwing errors. Similar to Zod's safeParse pattern.
+ *
+ * @param checker A compiled TypeBox schema checker
+ * @param value The value to validate
+ * @returns An object with either:
+ * - {success: true, data: validatedValue} if validation succeeds
+ * - {success: false, errors: [{message: string}]} if validation fails
+ */
+export function safeParse<T extends TSchema>(
+  checker: ReturnType<typeof TypeCompiler.Compile<T>>,
+  value: unknown,
+):
+  | { success: true; data: Static<T> }
+  | { success: false; errors: { message: string }[] } {
+  const isValid = checker.Check(value);
+
+  if (isValid) {
+    return {
+      success: true,
+      data: value as Static<T>,
+    };
+  }
+
+  return {
+    success: false,
+    errors: Array.from(checker.Errors(value)).map((error) => ({
+      message: error.message,
+    })),
+  };
 }

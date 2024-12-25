@@ -1,28 +1,28 @@
-import { Elysia, t } from "elysia";
+import { safeParse } from "@/utils/base";
+import { Type as t } from "@sinclair/typebox";
+import { TypeCompiler } from "@sinclair/typebox/compiler";
 
-/** Schema for client-side environment variables in typebox */
-const {
-  models: { clientSchema },
-} = new Elysia().model({
-  clientSchema: t.Object({
-    URL: t.String({
-      minLength: 1,
-      error: "URL client environment variable is not set!",
-    }),
+const clientSchema = t.Object({
+  URL: t.String({
+    minLength: 1,
+    error: "URL client environment variable is not set!",
   }),
 });
 
-const clientEnvResult = clientSchema.safeParse({
+const clientSchemaChecker = TypeCompiler.Compile(clientSchema);
+
+const clientEnvResult = safeParse(clientSchemaChecker, {
   URL: process.env.NEXT_PUBLIC_URL,
 });
 
-if (!clientEnvResult.data) {
+if (!clientEnvResult.success) {
   const firstError = clientEnvResult.errors[0];
-  if (firstError)
+  if (firstError) {
     throw new Error(
-      `Invalid client environment variable ${firstError.path.slice(1)}: ${firstError.summary.replaceAll("  ", " ")}`,
+      `Invalid client environment variable: ${firstError.message}`,
     );
-  else throw new Error(`Invalid client environment ${clientEnvResult.error}`);
+  }
+  throw new Error(`Invalid client environment validation failed`);
 }
 
 export const clientEnv = clientEnvResult.data;

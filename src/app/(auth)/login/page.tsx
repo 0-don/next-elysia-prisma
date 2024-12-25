@@ -1,7 +1,11 @@
 "use client";
 
 import { AuthHook } from "@/components/hooks/auth-hook";
-import { authenticationSchema, authSchemas } from "@/lib/typebox/auth";
+import {
+  authenticationChecker,
+  authenticationSchema,
+} from "@/lib/typebox/auth";
+import { safeParse } from "@/utils/base";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -60,7 +64,7 @@ export default function LoginPage(props: LoginPageProps) {
           type="submit"
           disabled={
             loginMutation.isPending ||
-            !authSchemas.authUser.safeParse({
+            !safeParse(authenticationChecker, {
               username,
               password,
             }).success

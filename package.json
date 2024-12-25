@@ -12,27 +12,27 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@elysiajs/eden": "^1.1.3",
-    "@prisma/client": "^6.0.1",
-    "@tanstack/react-query": "^5.62.3",
-    "elysia": "^1.1.26",
-    "jose": "^5.9.6",
-    "next": "15.0.4",
+    "@elysiajs/eden": "1.2.0",
+    "@prisma/client": "6.1.0",
+    "@tanstack/react-query": "5.62.10",
+    "elysia": "1.2.6",
+    "jose": "5.9.6",
+    "next": "15.1.2",
     "react": "19.0.0",
     "react-dom": "19.0.0"
   },
   "devDependencies": {
-    "@types/bun": "^1.1.14",
-    "@types/node": "^22.10.1",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9.15.0",
-    "eslint-config-next": "15.0.4",
-    "postcss": "^8",
-    "prettier": "^3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.9",
-    "prisma": "^6.0.1",
-    "tailwindcss": "^3.4.16",
-    "typescript": "^5"
+    "@types/bun": "1.1.14",
+    "@types/node": "22.10.2",
+    "@types/react": "19.0.2",
+    "@types/react-dom": "19.0.2",
+    "eslint": "9.17.0",
+    "eslint-config-next": "15.1.2",
+    "postcss": "8.4.49",
+    "prettier": "3.4.2",
+    "prettier-plugin-tailwindcss": "0.6.9",
+    "prisma": "6.1.0",
+    "tailwindcss": "3.4.17",
+    "typescript": "5.7.2"
   }
 }
