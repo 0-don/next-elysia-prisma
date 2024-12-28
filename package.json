@@ -14,10 +14,10 @@
   "dependencies": {
     "@elysiajs/eden": "1.2.0",
     "@prisma/client": "6.1.0",
-    "@tanstack/react-query": "5.62.10",
-    "elysia": "1.2.6",
+    "@tanstack/react-query": "5.62.11",
+    "elysia": "1.2.9",
     "jose": "5.9.6",
-    "next": "15.1.2",
+    "next": "15.1.3",
     "react": "19.0.0",
     "react-dom": "19.0.0"
   },
@@ -27,7 +27,7 @@
     "@types/react": "19.0.2",
     "@types/react-dom": "19.0.2",
     "eslint": "9.17.0",
-    "eslint-config-next": "15.1.2",
+    "eslint-config-next": "15.1.3",
     "postcss": "8.4.49",
     "prettier": "3.4.2",
     "prettier-plugin-tailwindcss": "0.6.9",
