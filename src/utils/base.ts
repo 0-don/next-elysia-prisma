@@ -12,7 +12,7 @@ import type { Static, TSchema } from "@sinclair/typebox/type";
  * @returns The response data of type T
  * @throws EdenFetchError if the response contains an error
  */
-export function handleEden<T>(
+export function handleEden<T, E = unknown>(
   response: (
     | {
         data: T;
@@ -20,7 +20,7 @@ export function handleEden<T>(
       }
     | {
         data: null;
-        error: EdenFetchError<number, string>;
+        error: EdenFetchError<number, E>;
       }
   ) & {
     status: number;
@@ -31,7 +31,6 @@ export function handleEden<T>(
   if (response.error) throw response.error;
   return response.data;
 }
-
 /**
  * Safe parsing utility for TypeBox schemas that returns a discriminated union result
  * rather than throwing errors. Similar to Zod's safeParse pattern.
