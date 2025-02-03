@@ -68,5 +68,5 @@ export const authRoute = new Elysia({ prefix: "/auth" })
   )
   .get("/logout", async (ctx) => {
     // Clear authentication cookie
-    !!(await cookies()).delete(serverEnv.AUTH_COOKIE);
+    (await cookies()).delete(serverEnv.AUTH_COOKIE);
   });
