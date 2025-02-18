@@ -43,7 +43,7 @@ export function handleEden<T, E = unknown>(
  */
 export function safeParse<T extends TSchema>(
   checker: ReturnType<typeof TypeCompiler.Compile<T>>,
-  value: unknown,
+  value: Partial<Static<T>>,
 ):
   | { success: true; data: Static<T> }
   | { success: false; errors: { message: string }[] } {
