@@ -34,7 +34,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-bun.lockb
+bun.lock*
 yarn.lock
 package-lock.json
 demo.db
