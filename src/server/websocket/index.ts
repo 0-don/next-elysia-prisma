@@ -1,23 +1,27 @@
 import { decrypt } from "@/lib/jwt";
-import { Elysia } from "elysia";
+import node from "@elysiajs/node";
+import { Elysia, ElysiaAdapter } from "elysia";
 
-export const wsRoute = new Elysia().ws("/ws", {
-  message(ws, message) {
-    ws.send(`Echo: ${message}`);
-  },
+export const wsRoute = new Elysia({ adapter: node() as ElysiaAdapter }).ws(
+  "/ws",
+  {
+    message(ws, message) {
+      ws.send(`Echo: ${message}`);
+    },
 
-  async open(ws) {
-    const token = ws.data.query.token;
-    if (token) {
-      const user = await decrypt(token);
-      if (user) {
-        (ws.data as any).user = user;
-        ws.send(JSON.stringify({ type: "auth", status: "success" }));
+    async open(ws) {
+      const token = ws.data.query.token;
+      if (token) {
+        const user = await decrypt(token);
+        if (user) {
+          (ws.data as any).user = user;
+          ws.send(JSON.stringify({ type: "auth", status: "success" }));
+        }
       }
-    }
-  },
+    },
 
-  close(ws) {
-    console.log("WebSocket disconnected");
+    close(ws) {
+      console.log("WebSocket disconnected");
+    },
   },
-});
+);

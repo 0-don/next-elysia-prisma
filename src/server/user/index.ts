@@ -1,7 +1,8 @@
 import { serverEnv } from "@/lib/env/server";
 import { decrypt } from "@/lib/jwt";
+import node from "@elysiajs/node";
 import { User } from "@prisma/client";
-import { Elysia, InternalServerError } from "elysia";
+import { Elysia, ElysiaAdapter, InternalServerError } from "elysia";
 import { cookies } from "next/headers";
 
 /**
@@ -9,15 +10,15 @@ import { cookies } from "next/headers";
  * Needs to be combined at the `app/api/[[...route]]/route.ts` file.
  * Represents RPC client types based on input & output.
  */
-export const userRoute = new Elysia({ prefix: "/user" }).get(
-  "/me",
-  async (ctx) => {
-    const user = await decrypt<User>(
-      (await cookies()).get(serverEnv.AUTH_COOKIE)?.value,
-    );
+export const userRoute = new Elysia({
+  prefix: "/user",
+  adapter: node() as ElysiaAdapter,
+}).get("/me", async (ctx) => {
+  const user = await decrypt<User>(
+    (await cookies()).get(serverEnv.AUTH_COOKIE)?.value,
+  );
 
-    if (!user) throw new InternalServerError("User not found");
+  if (!user) throw new InternalServerError("User not found");
 
-    return user;
-  },
-);
+  return user;
+});
