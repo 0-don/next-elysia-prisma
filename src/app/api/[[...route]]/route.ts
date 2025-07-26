@@ -1,6 +1,8 @@
 import { authRoute } from "@/server/auth";
 import { userRoute } from "@/server/user";
-import { Elysia } from "elysia";
+import { wsRoute } from "@/server/websocket";
+import node from "@elysiajs/node";
+import { Elysia, ElysiaAdapter } from "elysia";
 
 export const dynamic = "force-dynamic";
 
@@ -8,7 +10,8 @@ export const dynamic = "force-dynamic";
  * Main API router
  * Combines auth and user routes under the '/api' prefix
  */
-const app = new Elysia({ prefix: "/api", aot: false })
+const app = new Elysia({ prefix: "/api", adapter: node() as ElysiaAdapter })
+  .use(wsRoute)
   .use(userRoute)
   .use(authRoute);
 
