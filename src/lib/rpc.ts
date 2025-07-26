@@ -1,5 +1,5 @@
-import { App } from "@/app/api/[[...route]]/route";
 import { edenTreaty } from "@elysiajs/eden";
+import { App } from "../../server";
 
 /**
  * Creates an RPC client using edenTreaty.

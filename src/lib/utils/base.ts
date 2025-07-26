@@ -1,6 +1,14 @@
-import type { EdenFetchError } from "@elysiajs/eden/dist/errors";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import type { Static, TSchema } from "@sinclair/typebox/type";
+
+export declare class EdenFetchError<
+  Status extends number = number,
+  Value = unknown,
+> extends Error {
+  status: Status;
+  value: Value;
+  constructor(status: Status, value: Value);
+}
 
 /**
  * Helper to handle Eden.js API responses for use with TanStack Query.

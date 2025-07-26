@@ -2,8 +2,7 @@ import { serverEnv } from "@/lib/env/server";
 import { encrypt } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
 import { authenticationSchema } from "@/lib/typebox/auth";
-import node from "@elysiajs/node";
-import { Elysia, ElysiaAdapter, InternalServerError } from "elysia";
+import { Elysia, InternalServerError } from "elysia";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
 
@@ -14,7 +13,6 @@ import { cookies } from "next/headers";
  */
 export const authRoute = new Elysia({
   prefix: "/auth",
-  adapter: node() as ElysiaAdapter,
 })
   .post(
     "/register",

@@ -1,8 +1,7 @@
 import { serverEnv } from "@/lib/env/server";
 import { decrypt } from "@/lib/jwt";
-import node from "@elysiajs/node";
 import { User } from "@prisma/client";
-import { Elysia, ElysiaAdapter, InternalServerError } from "elysia";
+import { Elysia, InternalServerError } from "elysia";
 import { cookies } from "next/headers";
 
 /**
@@ -12,7 +11,6 @@ import { cookies } from "next/headers";
  */
 export const userRoute = new Elysia({
   prefix: "/user",
-  adapter: node() as ElysiaAdapter,
 }).get("/me", async (ctx) => {
   const user = await decrypt<User>(
     (await cookies()).get(serverEnv.AUTH_COOKIE)?.value,

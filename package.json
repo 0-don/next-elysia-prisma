@@ -4,29 +4,32 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "cross-env NODE_ENV=development tsx watch server.ts",
     "build": "next build",
-    "start": "prisma migrate deploy && next start",
+    "start": "prisma migrate deploy && cross-env NODE_ENV=production node dist/server.js",
     "lint": "next lint",
     "prisma": "prisma migrate dev --name init && prisma generate",
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@elysiajs/cors": "^1.3.3",
     "@elysiajs/eden": "1.3.2",
-    "@elysiajs/node": "^1.3.0",
     "@prisma/client": "6.12.0",
     "@tanstack/react-query": "5.83.0",
     "elysia": "1.3.6",
     "jose": "6.0.12",
     "next": "15.4.4",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "uWebSockets.js": "uNetworking/uWebSockets.js#v20.44.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11",
     "@types/node": "24.1.0",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
+    "cross-env": "^10.0.0",
+    "dotenv": "^17.2.1",
     "eslint": "9.17.0",
     "eslint-config-next": "15.4.4",
     "postcss": "8.5.6",
@@ -34,7 +37,7 @@
     "prettier-plugin-tailwindcss": "^0.6.14",
     "prisma": "6.12.0",
     "tailwindcss": "^4.1.11",
-    "typescript": "5.8.3",
-    "tsx": "^4.20.3"
+    "tsx": "^4.20.3",
+    "typescript": "5.8.3"
   }
 }
