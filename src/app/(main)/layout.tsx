@@ -1,6 +1,6 @@
 import getQueryClient from "@/lib/react-query";
 import { rpc } from "@/lib/rpc";
-import { setCookies } from "@/utils/server";
+import { setCookies } from "@/lib/utils/server";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { redirect } from "next/navigation";
 

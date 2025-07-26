@@ -1,6 +1,5 @@
 import { cookies, headers } from "next/headers";
-import { serverEnv } from "../lib/env/server";
-
+import { serverEnv } from "../env/server";
 /**
  * get cookie from nextjs header for RPC calls in server components ONLY.
  * @returns An object containing the cookie header for authentication.

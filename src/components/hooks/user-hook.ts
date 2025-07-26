@@ -1,5 +1,5 @@
 import { rpc } from "@/lib/rpc";
-import { handleEden } from "@/utils/base";
+import { handleEden } from "@/lib/utils/base";
 import { useQuery } from "@tanstack/react-query";
 
 /**

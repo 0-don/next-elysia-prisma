@@ -1,5 +1,5 @@
-import { safeParse } from "@/utils/base";
-import { SERVER_URL_KEY } from "@/utils/constants";
+import { safeParse } from "@/lib/utils/base";
+import { SERVER_URL_KEY } from "@/lib/utils/constants";
 import { Type as t } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 

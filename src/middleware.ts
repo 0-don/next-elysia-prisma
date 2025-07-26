@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { SERVER_URL_KEY } from "./utils/constants";
+import { SERVER_URL_KEY } from "./lib/utils/constants";
 
 /**
  * Nextjs bypass to set the server URL in the request headers so it can be read while in server components.

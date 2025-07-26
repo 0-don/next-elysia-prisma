@@ -1,4 +1,4 @@
-import { safeParse } from "@/utils/base";
+import { safeParse } from "@/lib/utils/base";
 import { Type as t } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 

@@ -5,7 +5,7 @@ import {
   authenticationChecker,
   authenticationSchema,
 } from "@/lib/typebox/auth";
-import { safeParse } from "@/utils/base";
+import { safeParse } from "@/lib/utils/base";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
