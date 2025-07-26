@@ -1,4 +1,4 @@
-import { serverEnv } from "@/utils/env/server";
+import { serverEnv } from "@/lib/env/server";
 import * as jose from "jose";
 
 // Create an encryption key from the server's SECRET environment variable
