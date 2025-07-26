@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthHook } from "@/components/hooks/auth-hook";
+import { AuthHook } from "@/hooks/auth-hook";
 import {
   authenticationChecker,
   authenticationSchema,

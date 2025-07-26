@@ -1,6 +1,6 @@
 "use client";
 
-import { UserHook } from "@/components/hooks/user-hook";
+import { UserHook } from "@/hooks/user-hook";
 import Link from "next/link";
 
 interface MainPageProps {}
