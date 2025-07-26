@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthHook } from "@/hooks/auth-hook";
+import { useLoginMutation } from "@/hooks/auth-hook";
 import {
   authenticationChecker,
   authenticationSchema,
@@ -14,7 +14,7 @@ interface LoginPageProps {}
 
 export default function LoginPage(props: LoginPageProps) {
   const router = useRouter();
-  const { loginMutation } = AuthHook();
+  const loginMutation = useLoginMutation();
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

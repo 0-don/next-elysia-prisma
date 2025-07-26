@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthHook } from "@/hooks/auth-hook";
+import { useLogoutMutation } from "@/hooks/auth-hook";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -8,7 +8,7 @@ interface LogoutPageProps {}
 
 export default function LogoutPage(props: LogoutPageProps) {
   const router = useRouter();
-  const { logoutMutation } = AuthHook();
+  const logoutMutation = useLogoutMutation();
 
   useEffect(() => {
     logoutMutation

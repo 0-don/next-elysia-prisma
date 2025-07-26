@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthHook } from "@/hooks/auth-hook";
+import { useRegisterMutation } from "@/hooks/auth-hook";
 import {
   authenticationChecker,
   authenticationSchema,
@@ -12,7 +12,7 @@ import { FormEvent, useState } from "react";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { registerMutation } = AuthHook();
+  const registerMutation = useRegisterMutation();
   const [status, setStatus] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

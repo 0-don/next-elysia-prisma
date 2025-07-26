@@ -1,4 +1,5 @@
-import getQueryClient from "@/lib/react-query";
+import { queryKeys } from "@/lib/query/query-keys";
+import getQueryClient from "@/lib/query/react-query";
 import { rpc } from "@/lib/rpc";
 import { setCookies } from "@/lib/utils/server";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
@@ -20,7 +21,7 @@ export default async function MainLayout(props: MainLayoutProps) {
   if (meError) redirect("/login");
 
   // Set the fetched user data in the query client cache `src/components/hooks/user-hook.ts`
-  queryClient.setQueryData(["me"], me);
+  queryClient.setQueryData(queryKeys.me(), me);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

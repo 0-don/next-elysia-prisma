@@ -1,12 +1,12 @@
 "use client";
 
-import { UserHook } from "@/hooks/user-hook";
+import { useMeQuery } from "@/hooks/user-hook";
 import Link from "next/link";
 
 interface MainPageProps {}
 
 export default function MainPage(props: MainPageProps) {
-  const { meQuery } = UserHook();
+  const meQuery = useMeQuery();
 
   return (
     <main>
