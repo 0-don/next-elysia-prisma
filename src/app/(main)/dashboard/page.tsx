@@ -1,5 +1,6 @@
 "use client";
 
+import ChatComponent from "@/components/chat-component";
 import { useMeQuery } from "@/hooks/user-hook";
 import Link from "next/link";
 
@@ -12,6 +13,7 @@ export default function MainPage(props: MainPageProps) {
     <main>
       <div>id: {meQuery.data?.id}</div>
       <div>user: {meQuery.data?.username}</div>
+      <ChatComponent />
       <Link className="bg-red-500" href="/logout">
         Logout
       </Link>
