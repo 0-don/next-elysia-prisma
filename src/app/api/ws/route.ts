@@ -1,4 +1,5 @@
-import type { WebSocket } from "ws";
+import type { IncomingMessage } from "http";
+import type { WebSocket, WebSocketServer } from "ws";
 
 const clients = new Set<WebSocket>();
 
@@ -8,8 +9,8 @@ export function GET() {
 
 export function SOCKET(
   client: WebSocket,
-  request: import("http").IncomingMessage,
-  server: import("ws").WebSocketServer,
+  request: IncomingMessage,
+  server: WebSocketServer,
 ) {
   console.log("Client connected");
   clients.add(client);
