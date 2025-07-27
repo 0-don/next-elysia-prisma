@@ -9,7 +9,7 @@
     "start": "prisma migrate deploy && next start",
     "lint": "next lint",
     "prisma": "prisma migrate dev --name init && prisma generate",
-    "postinstall": "prisma generate && next-ws patch"
+    "postinstall": "prisma generate && next-ws patch --yes"
   },
   "dependencies": {
     "@elysiajs/eden": "1.3.2",
