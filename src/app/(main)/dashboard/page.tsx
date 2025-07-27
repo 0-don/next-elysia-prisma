@@ -1,6 +1,6 @@
 "use client";
 
-import ChatComponent from "@/components/chat-component";
+import ChatComponent from "@/components/simple-component";
 import { useMeQuery } from "@/hooks/user-hook";
 import Link from "next/link";
 
