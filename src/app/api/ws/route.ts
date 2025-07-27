@@ -2,6 +2,10 @@ import type { WebSocket } from "ws";
 
 const clients = new Set<WebSocket>();
 
+export function GET() {
+  return new Response("WebSocket endpoint", { status: 200 });
+}
+
 export function SOCKET(
   client: WebSocket,
   request: import("http").IncomingMessage,
