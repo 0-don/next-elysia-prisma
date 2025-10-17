@@ -1,4 +1,4 @@
-## NEP Stack.
+## NEP Stack!
 
 ### Next, Elysia, Prisma
 
