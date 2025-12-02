@@ -39,6 +39,7 @@ export function handleEden<T, E = unknown>(
   if (response.error) throw response.error;
   return response.data;
 }
+
 /**
  * Safe parsing utility for TypeBox schemas that returns a discriminated union result
  * rather than throwing errors. Similar to Zod's safeParse pattern.
