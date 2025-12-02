@@ -1,4 +1,4 @@
-FROM node:22-alpine AS deps
+FROM node:24-alpine AS deps
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ COPY prisma ./prisma
 RUN npm install --force
 
 # 
-FROM node:22-alpine AS builder
+FROM node:24-alpine AS builder
 WORKDIR /app
 
 COPY . .
@@ -25,7 +25,7 @@ ENV NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL
 RUN npm run build
 
 # 
-FROM node:22-alpine AS prod
+FROM node:24-alpine AS prod
 
 WORKDIR /app
 
