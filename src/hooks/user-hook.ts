@@ -11,6 +11,10 @@ export function useMeQuery() {
   });
 }
 
-const id = "replace-with-id";
-
-const test = await rpc.api.user[id].get();
+export function useUserQuery(userId: string) {
+  return useQuery({
+    queryKey: queryKeys.user(userId),
+    enabled: false,
+    queryFn: async () => handleEden(await rpc.api.user[userId].get()),
+  });
+}
