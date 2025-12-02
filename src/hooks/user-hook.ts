@@ -10,3 +10,7 @@ export function useMeQuery() {
     queryFn: async () => handleEden(await rpc.api.user.me.get()),
   });
 }
+
+const id = "replace-with-id";
+
+const test = await rpc.api.user[id].get();

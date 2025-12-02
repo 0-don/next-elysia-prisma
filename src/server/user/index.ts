@@ -11,12 +11,18 @@ import { cookies } from "next/headers";
  */
 export const userRoute = new Elysia({
   prefix: "/user",
-}).get("/me", async (ctx) => {
-  const user = await decrypt<User>(
-    (await cookies()).get(serverEnv.AUTH_COOKIE)?.value,
-  );
+})
+  .get("/me", async (ctx) => {
+    const user = await decrypt<User>(
+      (await cookies()).get(serverEnv.AUTH_COOKIE)?.value,
+    );
 
-  if (!user) throw new InternalServerError("User not found");
+    if (!user) throw new InternalServerError("User not found");
 
-  return user;
-});
+    return user;
+  })
+  .get(":id", async (ctx) => {
+    const userId = ctx.params.id;
+
+    return userId;
+  });
