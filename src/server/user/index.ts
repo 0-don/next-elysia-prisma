@@ -1,8 +1,8 @@
 import { serverEnv } from "@/lib/env/server";
-import { decrypt } from "@/lib/jwt";
 import { User } from "@prisma/client";
 import { Elysia, InternalServerError } from "elysia";
 import { cookies } from "next/headers";
+import { decrypt } from "../../lib/jwt";
 
 /**
  * User route for retrieving the current user's information.

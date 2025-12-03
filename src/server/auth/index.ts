@@ -1,10 +1,10 @@
 import { serverEnv } from "@/lib/env/server";
-import { encrypt } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
 import { authenticationSchema } from "@/lib/typebox/auth";
 import { Elysia, InternalServerError } from "elysia";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
+import { encrypt } from "../../lib/jwt";
 
 /**
  * Authentication routes for user registration, login, and logout.
