@@ -1,5 +1,5 @@
 import { serverEnv } from "@/lib/env/server";
-import { User } from "@prisma/client";
+import { User } from "@/lib/generated/prisma/client";
 import { Elysia, InternalServerError } from "elysia";
 import { cookies } from "next/headers";
 import { decrypt } from "../../lib/jwt";
