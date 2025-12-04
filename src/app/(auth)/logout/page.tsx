@@ -20,5 +20,15 @@ export default function LogoutPage(props: LogoutPageProps) {
       .catch((error) => console.error(error));
   }, []);
 
-  return <></>;
+  return (
+    <div className="flex min-h-screen items-center justify-center p-8">
+      <div className="text-center">
+        <div className="mb-4 inline-block h-12 w-12 animate-spin rounded-full border-4 border-gray-700 border-t-blue-500"></div>
+        <h2 className="text-xl font-semibold text-gray-300">Logging out...</h2>
+        <p className="mt-2 text-sm text-gray-500">
+          Please wait while we sign you out
+        </p>
+      </div>
+    </div>
+  );
 }

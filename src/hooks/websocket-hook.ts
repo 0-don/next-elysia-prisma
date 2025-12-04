@@ -29,7 +29,7 @@ export function useWebSocket() {
     };
 
     ws.current.onerror = (error) => {
-      console.error("WebSocket error:", error);
+      console.warn("WebSocket warn:", error);
       setIsConnected(false);
     };
 
