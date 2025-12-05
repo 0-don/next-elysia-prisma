@@ -1,5 +1,5 @@
-import { serverEnv } from "@/lib/env/server";
 import { User } from "@/lib/generated/prisma/client";
+import { AUTH_COOKIE } from "@/lib/utils/constants";
 import { Elysia, InternalServerError } from "elysia";
 import { cookies } from "next/headers";
 import { decrypt } from "../../lib/jwt";
@@ -14,7 +14,7 @@ export const userRoute = new Elysia({
 })
   .get("/me", async (ctx) => {
     const user = await decrypt<User>(
-      (await cookies()).get(serverEnv.AUTH_COOKIE)?.value,
+      (await cookies()).get(AUTH_COOKIE)?.value,
     );
 
     if (!user) throw new InternalServerError("User not found");

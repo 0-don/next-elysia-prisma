@@ -1,8 +1,8 @@
-import { serverEnv } from "@/lib/env/server";
+import { SECRET } from "@/lib/utils/constants";
 import * as jose from "jose";
 
 // Create an encryption key from the server's SECRET environment variable
-const key = new TextEncoder().encode(serverEnv.SECRET);
+const key = new TextEncoder().encode(SECRET);
 
 /**
  * Encrypts a value using JSON Web Encryption (JWE)

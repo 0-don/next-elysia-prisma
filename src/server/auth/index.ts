@@ -1,6 +1,6 @@
-import { serverEnv } from "@/lib/env/server";
 import prisma from "@/lib/prisma";
 import { authenticationSchema } from "@/lib/typebox/auth";
+import { AUTH_COOKIE, SEVEN_DAYS } from "@/lib/utils/constants";
 import { Elysia, InternalServerError } from "elysia";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
@@ -32,11 +32,11 @@ export const authRoute = new Elysia({
       });
 
       const cookie: ResponseCookie = {
-        name: serverEnv.AUTH_COOKIE,
+        name: AUTH_COOKIE,
         value: (await encrypt(user))!,
         path: "/",
         httpOnly: true,
-        maxAge: serverEnv.SEVEN_DAYS,
+        maxAge: SEVEN_DAYS,
       };
       // Set authentication cookie
       (await cookies()).set(cookie);
@@ -57,11 +57,11 @@ export const authRoute = new Elysia({
       if (!user) throw new InternalServerError("User not found");
 
       const cookie: ResponseCookie = {
-        name: serverEnv.AUTH_COOKIE,
+        name: AUTH_COOKIE,
         value: (await encrypt(user))!,
         path: "/",
         httpOnly: true,
-        maxAge: serverEnv.SEVEN_DAYS,
+        maxAge: SEVEN_DAYS,
       };
       // Set authentication cookie
       (await cookies()).set(cookie);
@@ -70,5 +70,5 @@ export const authRoute = new Elysia({
   )
   .get("/logout", async (ctx) => {
     // Clear authentication cookie
-    (await cookies()).delete(serverEnv.AUTH_COOKIE);
+    (await cookies()).delete(AUTH_COOKIE);
   });
