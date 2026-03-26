@@ -1,7 +1,8 @@
 import { queryKeys } from "@/lib/query/query-keys";
 import { rpc } from "@/lib/rpc";
+import { EdenArgs } from "@/lib/types/eden";
 import { handleEden } from "@/lib/utils/base";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useMeQuery() {
   return useQuery({
@@ -15,6 +16,6 @@ export function useUserQuery(userId: string) {
   return useQuery({
     queryKey: queryKeys.user(userId),
     enabled: false,
-    queryFn: async () => handleEden(await rpc.api.user[userId].get()),
+    queryFn: async () => handleEden(await rpc.api.user({ id: userId }).get()),
   });
 }

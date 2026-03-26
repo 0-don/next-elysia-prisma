@@ -1,4 +1,5 @@
 import { authRoute } from "@/server/auth";
+import { demoRoute } from "@/server/demo";
 import { userRoute } from "@/server/user";
 import { Elysia } from "elysia";
 
@@ -8,7 +9,10 @@ export const dynamic = "force-dynamic";
  * Main API router
  * Combines auth and user routes under the '/api' prefix
  */
-const app = new Elysia({ prefix: "/api" }).use(userRoute).use(authRoute);
+const app = new Elysia({ prefix: "/api" })
+  .use(userRoute)
+  .use(authRoute)
+  .use(demoRoute);
 
 /**
  * Export the app type for use with RPC clients (e.g., edenTreaty)
