@@ -15,7 +15,7 @@ export const setCookies = async () => {
     .filter(Boolean)
     .join("; ");
 
-  return { $headers: { cookie } };
+  return { headers: { cookie } };
 };
 
 /**
