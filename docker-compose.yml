@@ -18,7 +18,7 @@ services:
       - proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.demo.rule=Host(`demo.coding.global`)"
+      - "traefik.http.routers.demo.rule=Host(`demo.coding-global.com`)"
       - "traefik.http.routers.demo.entrypoints=websecure"
       - "traefik.http.routers.demo.tls.certresolver=letsencrypt"
       - "traefik.http.services.demo.loadbalancer.server.port=3000"

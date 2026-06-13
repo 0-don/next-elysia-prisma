@@ -23,8 +23,10 @@ export default function LoginPage(props: LoginPageProps) {
     e.preventDefault();
     loginMutation
       .mutateAsync({
-        username,
-        password,
+        body: {
+          username,
+          password,
+        },
       })
       .then(() => router.push("/dashboard"))
       .catch((error) => setStatus(JSON.stringify(error)));
